@@ -1,9 +1,9 @@
-const fs = require("fs");
-const request = require("sync-request");
-const URL = "https://games.roblox.com/v1/games/3016661674/servers/Public?sortOrder=Asc&limit=100";
-const interval = 1000*5*60;
+var paste = require("better-pastebin");
+var request = require("sync-request");
+var URL = "https://games.roblox.com/v1/games/3016661674/servers/Public?sortOrder=Asc&limit=100";
+var interval = 1000*5*1;
 
-var DATA = JSON.parse(fs.readFileSync("data.json", "utf8"));
+var DATA = [];
 
 function getServerData(cursor) {
     cursor = cursor || "";
@@ -30,25 +30,28 @@ function getArrayData(arr) { //pirate time
     return [max, min, med, mode, avg];
 }
 
-setInterval(function(){
-    var data = getServerData();
+paste.setDevKey(process.env.devKey);
+paste.login("SlimeeMen22", process.env.Password, (s, d) => {
+    setInterval(function() {
+        var data = getServerData();
 
-    var playerCounts = [];
-    var fpsCounts = [];
-    var pingCounts = [];
-
-    for (var i = 0; i < data.length; i++) {
-        var datum = data[i];
-        playerCounts[i] = datum.playing;
-        fpsCounts[i] = datum.fps;
-        pingCounts[i] = datum.ping;
-    }
-
-    var playerData = getArrayData(playerCounts);
-    var fpsData = getArrayData(fpsCounts);
-    var pingData = getArrayData(pingCounts);
+        var playerCounts = [];
+        var fpsCounts = [];
+        var pingCounts = [];
     
-    DATA[DATA.length] = [playerData, fpsData, pingData];
-    fs.writeFileSync("data.json", JSON.stringify(DATA));
+        for (var i = 0; i < data.length; i++) {
+            var datum = data[i];
+            playerCounts[i] = datum.playing;
+            fpsCounts[i] = datum.fps;
+            pingCounts[i] = datum.ping;
+        }
+    
+        var playerData = getArrayData(playerCounts);
+        var fpsData = getArrayData(fpsCounts);
+        var pingData = getArrayData(pingCounts);
 
-}, interval);
+        DATA[DATA.length] = [playerData, fpsData, pingData];
+
+        paste.edit("bGwNmFPU", options={contents:JSON.stringify(DATA)});
+    }, interval);
+});
