@@ -51,5 +51,6 @@ paste.login("SlimeeMen22", process.env.PASS, (s, d) => {
 
         DATA[DATA.length] = [playerData, fpsData, pingData];
         paste.edit("bGwNmFPU", options={contents:JSON.stringify(DATA)});
+        console.log("paste updated");
     }, interval);
 });
