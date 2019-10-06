@@ -1,7 +1,7 @@
 var paste = require("better-pastebin");
 var request = require("sync-request");
 var URL = "https://games.roblox.com/v1/games/3016661674/servers/Public?sortOrder=Asc&limit=100";
-var interval = 1000*15*60;
+var interval = 1000*15*1;
 var DATA = [];
 
 function getServerData(cursor) {
