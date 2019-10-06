@@ -30,8 +30,8 @@ function getArrayData(arr) { //pirate time
     return [max, min, med, mode, avg];
 }
 
-paste.setDevKey(process.env.devKey);
-paste.login("SlimeeMen22", process.env.Password, (s, d) => {
+paste.setDevKey(process.env.KEY);
+paste.login("SlimeeMen22", process.env.PASS, (s, d) => {
     setInterval(function() {
         var data = getServerData();
 
