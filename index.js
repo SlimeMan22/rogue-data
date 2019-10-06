@@ -2,9 +2,6 @@ var paste = require("better-pastebin");
 var request = require("sync-request");
 var URL = "https://games.roblox.com/v1/games/3016661674/servers/Public?sortOrder=Asc&limit=100";
 var interval = 1000*15*60;
-
-console.log(132131);
-
 var DATA = [];
 
 function getServerData(cursor) {
@@ -34,7 +31,6 @@ function getArrayData(arr) { //pirate time
 
 paste.setDevKey(process.env.KEY);
 paste.login("SlimeeMen22", process.env.PASS, (s, d) => {
-    paste.edit("bGwNmFPU", options={contents:"it worked"});
     setInterval(function() {
         var data = getServerData();
 
