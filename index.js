@@ -1,7 +1,7 @@
 var paste = require("better-pastebin");
 var request = require("sync-request");
 var URL = "https://games.roblox.com/v1/games/3016661674/servers/Public?sortOrder=Asc&limit=100";
-var interval = 1000*15*1;
+var interval = 1000*10*60;
 var DATA = [];
 
 function getServerData(cursor) {
@@ -31,9 +31,7 @@ function getArrayData(arr) { //pirate time
 
 paste.setDevKey(process.env.KEY);
 paste.login("SlimeeMen22", process.env.PASS, (s, d) => {
-    console.log("got here");
     setInterval(function() {
-        console.log("here too");
         var data = getServerData();
 
         var playerCounts = [];
@@ -52,7 +50,6 @@ paste.login("SlimeeMen22", process.env.PASS, (s, d) => {
         var pingData = getArrayData(pingCounts);
 
         DATA[DATA.length] = [playerData, fpsData, pingData];
-        console.log("until here")
         paste.edit("bGwNmFPU", options={contents:JSON.stringify(DATA)});
     }, interval);
 });
