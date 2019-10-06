@@ -1,7 +1,7 @@
 {
   "name": "sync-request",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "better-pastebin": "^0.4.1",
     "sync-request": "^6.1.0"
